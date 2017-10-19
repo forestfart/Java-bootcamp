@@ -2,6 +2,7 @@ package com.kodilla.stream;
 
 import com.kodilla.stream.beautifier.PoemBeautifier;
 import com.kodilla.stream.beautifier.PoemDecorator;
+import com.kodilla.stream.iterate.NumbersGenerator;
 import com.kodilla.stream.lambda.*;
 import com.kodilla.stream.reference.FunctionalCalculator;
 
@@ -30,7 +31,7 @@ public class StreamMain {
             //expressionExecutor.executeExpression(3, 4, FunctionalCalculator::divideAByB);
 
         //Zadanie z modułu 7.1
-        String rawPoem = new String ("Jedzą, piją, lulki palą,\n" +
+        /*String rawPoem = new String ("Jedzą, piją, lulki palą,\n" +
                 "Tańce, hulanka, swawola;\n" +
                 "Ledwie karczmy nie rozwalą,\n" +
                 "Cha cha, chi chi, hejza, hola!\n" +
@@ -64,6 +65,10 @@ public class StreamMain {
         poemBeautifier.beautify(rawPoem,(Str) -> {
             System.out.println("-------------------\nLambda expression #4\n");
             return Str.replace("Twardowski", "POLITYCZNIE POPRAWNY CZLOWIEK");
-        });
+        });*/
+
+        //moduł7.2
+        System.out.println("Using Stream to generate even numbers from 1 to 20");
+        NumbersGenerator.generateEven(20);
     }
 }
