@@ -19,7 +19,7 @@ public class WorldTestSuite {
         Continent continentEurope = new Continent("Europe");
         Continent continentAsia = new Continent("Asia");
         Continent continentNorthAmerica = new Continent("North America");
-        //add countries to countries
+        //add countries to continents
         continentEurope.addCountry(poland);
         continentEurope.addCountry(italy);
         continentAsia.addCountry(china);
