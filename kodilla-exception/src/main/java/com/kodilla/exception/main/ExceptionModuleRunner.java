@@ -17,22 +17,9 @@ public class ExceptionModuleRunner {
             System.out.println("Problem while reading a file!");
         }*/
 
-        //zadanie z modułu 8.3
+        // zadanie z modułu 8.3
 
-        SecondChallenge checkXY = new SecondChallenge();
-
-        try {
-
-            System.out.println(checkXY.probablyIWillThrowException(2,1));
-
-        } catch (Exception e){
-
-            System.out.println(e);
-            ExceptionHandling printOutTheRule = new ExceptionHandling();
-            printOutTheRule.runExceptionhandling();
-
-        } finally {
-            System.out.println("the end.");
-        }
+        ExceptionHandling secondChallengeExceptionHandler = new ExceptionHandling();
+        secondChallengeExceptionHandler.runExceptionhandling();
     }
 }
