@@ -1,6 +1,6 @@
 package com.kodilla.exception.test;
 
-public class ExceptionHandling extends Exception {
+public class ExceptionHandling {
     public void runExceptionhandling() {
 
         SecondChallenge checkXY = new SecondChallenge();
