@@ -84,7 +84,7 @@ public class StreamMain {
     //moduł7.1
 /*    simple lambda expression example
     Processor processor = new Processor();
-    Executor codeToExecute = () -> System.out.println("This is an example text executed by lambda fucntion");
+    Executor codeToExecute = () -> System.out.println("This is an example text executed by lambda function");
     processor.execute(codeToExecute);
 
     more advanced lambda expressions (passing an arguments)
