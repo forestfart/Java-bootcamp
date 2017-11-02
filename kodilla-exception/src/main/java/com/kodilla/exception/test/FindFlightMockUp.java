@@ -5,7 +5,7 @@ import java.util.Set;
 
 public final class FindFlightMockUp {
 
-    public static boolean checkIfExistsOnMap (Set<String> airportSet, String comparedAirport) {
+    private static boolean checkIfExistsOnMap (Set<String> airportSet, String comparedAirport) {
         boolean isOnMap = airportSet.stream()
                 .anyMatch(n -> n.equals(comparedAirport));
         System.out.println(comparedAirport + " <<---- exists on map: " + isOnMap);
