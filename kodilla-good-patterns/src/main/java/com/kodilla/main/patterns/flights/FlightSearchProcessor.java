@@ -32,7 +32,7 @@ public class FlightSearchProcessor {
         List<Flight> flightsFromDestination = departureAirportSearch(currentFlightList, departureAirport);
 
         return flightsFromDestination.stream()
-                .filter(n -> n.getArrivalAirport() == arrivalAirport)
+                .filter(n -> n.getArrivalAirport().equals(arrivalAirport))
                 .collect(Collectors.toList());
     }
 

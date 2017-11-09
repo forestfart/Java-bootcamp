@@ -78,7 +78,7 @@ public class PatternsMain {
         // finding direct flights between selected airports
 
         String selectedDepartingAirport = "KRK";
-        String selectedArrivalAirport = "GDN";
+        String selectedArrivalAirport = "WAW";
 
         List<Flight> directFlights = flightSearch.directFlightSearch(currentFlightsList.retrieve(), selectedDepartingAirport, selectedArrivalAirport);
 
