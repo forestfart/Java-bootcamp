@@ -5,13 +5,10 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.stream.Collectors;
-
 public class PortfolioTestSuite {
     @Test
-    public void testTaskAss() {
+    public void testTaskAdd() {
         //Given
-
         ApplicationContext context = new AnnotationConfigApplicationContext(BoardConfig.class);
         Board board = context.getBean(Board.class);
 
@@ -24,8 +21,8 @@ public class PortfolioTestSuite {
         board.inProgressList.addTask("task6");
 
         //Then
-        Assert.assertEquals("task1task2",board.toDoList.getTasks().stream().collect(Collectors.joining()));
-        Assert.assertEquals("task3task4",board.doneList.getTasks().stream().collect(Collectors.joining()));
-        Assert.assertEquals("task5task6",board.inProgressList.getTasks().stream().collect(Collectors.joining()));
+        Assert.assertEquals(2, board.toDoList.getTasks().size());
+        Assert.assertEquals(2,board.doneList.getTasks().size());
+        Assert.assertEquals(2,board.inProgressList.getTasks().size());
     }
 }
