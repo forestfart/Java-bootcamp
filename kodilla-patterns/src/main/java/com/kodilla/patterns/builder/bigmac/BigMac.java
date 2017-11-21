@@ -34,45 +34,45 @@ public class BigMac {
         private String sauce;
         private ArrayList<String> ingredients = new ArrayList<>();
 
-        public BigMacBuilder roll(final String roll) throws IllegalStateException {
+        public BigMacBuilder roll(final String roll) throws InvalidBigMacException {
             if (roll.equals(SESAME) || roll.equals(PLAIN)) {
                 this.roll = roll;
                 return this;
             } else if (roll.length() == 0) {
-                throw new IllegalStateException("Pick a roll, with sesame or without?");
+                throw new InvalidBigMacException("Pick a roll, with sesame or without?");
             } else {
-                throw new IllegalStateException("There is only choice of two rolls: Sesame or Plain");
+                throw new InvalidBigMacException("There is only choice of two rolls: Sesame or Plain");
             }
         }
 
-        public BigMacBuilder burgers(final int burgers) throws IllegalStateException {
+        public BigMacBuilder burgers(final int burgers) throws InvalidBigMacException {
             if (burgers >= 1 && burgers <= 4) {
                 this.burgers = burgers;
                 return this;
             } else {
-                throw new IllegalStateException("Please sect number of burgers (maximum 4)");
+                throw new InvalidBigMacException("Please sect number of burgers (maximum 4)");
             }
         }
 
-        public BigMacBuilder sauce(String sauce) throws IllegalStateException, NullPointerException {
+        public BigMacBuilder sauce(String sauce) throws InvalidBigMacException {
             if (sauce.equals(MAYONNAISE) || sauce.equals(THOUSANDISLANDS) || sauce.equals(BARBECUE)) {
                 this.sauce = sauce;
                 return this;
             } else if (sauce == null) {
-                throw new NullPointerException("Pick a sauce");
+                throw new InvalidBigMacException("Pick a sauce");
             } else {
-                throw new IllegalStateException("There is only choice of three sauces: Mayonnaise, Thousand Islands or Barbecue");
+                throw new InvalidBigMacException("There is only choice of three sauces: Mayonnaise, Thousand Islands or Barbecue");
             }
         }
 
-        public BigMacBuilder ingredients(String ingredient) throws IllegalStateException, NullPointerException {
+        public BigMacBuilder ingredients(String ingredient) throws InvalidBigMacException {
             if (ingredient.equals(LETTUCE) || ingredient.equals(ONION) || ingredient.equals(PICKLE) || ingredient.equals(CHILI) || ingredient.equals(MUSHROOM) || ingredient.equals(SHRIMP) || ingredient.equals(CHEESE)) {
                 ingredients.add(ingredient);
                 return this;
             } else if (ingredients.isEmpty()) {
-                throw new NullPointerException("Pick an ingredient");
+                throw new InvalidBigMacException("Pick an ingredient");
             } else {
-                throw new IllegalStateException("There are following options of ingredients: Lettuce, Onion, Pickle, Chili, Mushroom, Shrimp or Cheese");
+                throw new InvalidBigMacException("There are following options of ingredients: Lettuce, Onion, Pickle, Chili, Mushroom, Shrimp or Cheese");
             }
         }
 
