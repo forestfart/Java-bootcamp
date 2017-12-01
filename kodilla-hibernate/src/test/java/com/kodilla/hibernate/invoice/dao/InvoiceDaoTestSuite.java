@@ -78,11 +78,11 @@ public class InvoiceDaoTestSuite {
         //When
         invoiceDao.save(invoice1);
 
-        int invoiceID = invoice1.getId();
+        int invoiceId = invoice1.getId();
         String productName = invoice1.getItems().get(0).getProduct().getName();
 
         //Then
-        Assert.assertNotEquals(0,invoiceID);
+        Assert.assertNotEquals(0,invoiceId);
         Assert.assertEquals("Petrol Regular Unleaded", productName);
 
         //Clean-up
