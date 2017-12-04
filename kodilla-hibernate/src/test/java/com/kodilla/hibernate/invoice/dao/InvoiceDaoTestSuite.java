@@ -6,7 +6,6 @@ import com.kodilla.hibernate.invoice.Dao.ProductDao;
 import com.kodilla.hibernate.invoice.Invoice;
 import com.kodilla.hibernate.invoice.Item;
 import com.kodilla.hibernate.invoice.Product;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,8 +13,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -61,20 +58,6 @@ public class InvoiceDaoTestSuite {
         productDao.delete(petrolRegularUnleaded);
         productDao.delete(dieselRegular);
     }
-
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
-    public Product getIDFromDb(Iterable<Product> productList, String productName) {
-        int productFound = -1;
-        Session session = sessionFactory.openSession();
-        for(Product product : productList) {
-            if (product.getName().equals(productName)) {
-                productFound = product.getId();
-                System.out.println("+++++++++++++++++++ " + productFound + " ++++++++++++++++++++");
-            }
-        }
-        return productDao.findOne(productFound);
-    }
-
 
     @Test
     public void testInvoiceDaoSave() {
