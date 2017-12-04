@@ -29,4 +29,9 @@ dependencies {
 	('org.springframework.boot:spring-boot-starter-validation')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile 'org.jetbrains:annotations:15.0'
+	// https://mvnrepository.com/artifact/javax.validation/validation-api
+	compile group: 'javax.validation', name: 'validation-api', version: '1.0.0.GA'
+	// https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
+	compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.0.2.GA'
 }

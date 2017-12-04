@@ -28,7 +28,7 @@ public class Product {
     }
 
     @NotNull
-    @Column(name = "NAME")
+    @Column(name = "NAME", unique = false)
     public String getName() {
         return name;
     }
@@ -36,9 +36,7 @@ public class Product {
 
     @OneToMany(
             targetEntity = Item.class,
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            mappedBy = "product"
     )
     public List<Item> getItems() {
         return items;

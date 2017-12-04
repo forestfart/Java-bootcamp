@@ -27,14 +27,12 @@ public class Item {
     @Id
     @GeneratedValue
     @NotNull
-    @Column(name="ITEM_ID", unique=true)
+    @Column(name="ITEM_ID", unique = true)
     public int getId() {
         return id;
     }
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH},
-                fetch = FetchType.LAZY
-    )
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PRODUCT_ID")
     public Product getProduct() {
         return product;
@@ -57,9 +55,7 @@ public class Item {
         return value;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL,
-                fetch = FetchType.LAZY
-    )
+    @ManyToOne
     @JoinColumn(name = "INVOICE_ID")
     public Invoice getInvoice() {
         return invoice;

@@ -22,21 +22,20 @@ public class Invoice {
     @Id
     @GeneratedValue
     @NotNull
-    @Column(name="INVOICE_ID", unique=true)
+    @Column(name = "INVOICE_ID", unique = true)
     public int getId() {
         return id;
     }
 
-    @Column(name="INVOICE_NUMBER")
+    @Column(name = "INVOICE_NUMBER")
     public String getNumber() {
         return number;
     }
 
     @OneToMany(
             targetEntity = Item.class,
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            mappedBy = "invoice",
+            cascade = CascadeType.ALL
     )
     public List<Item> getItems() {
         return items;
