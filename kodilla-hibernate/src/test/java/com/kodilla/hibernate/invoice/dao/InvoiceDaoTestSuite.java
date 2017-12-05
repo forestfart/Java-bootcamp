@@ -6,7 +6,6 @@ import com.kodilla.hibernate.invoice.Dao.ProductDao;
 import com.kodilla.hibernate.invoice.Invoice;
 import com.kodilla.hibernate.invoice.Item;
 import com.kodilla.hibernate.invoice.Product;
-import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +24,6 @@ public class InvoiceDaoTestSuite {
     private ItemDao itemDao;
     @Autowired
     private InvoiceDao invoiceDao;
-    private static SessionFactory sessionFactory;
 
     @Test
     public void testItemDaoSaveWithProduct() {
@@ -62,8 +60,11 @@ public class InvoiceDaoTestSuite {
     @Test
     public void testInvoiceDaoSave() {
 
-        //Given
+        /*invoiceDao.deleteAll();
+        itemDao.deleteAll();
+        productDao.deleteAll();*/
 
+        //Given
         Product petrolRegularUnleaded = new Product("Petrol Regular Unleaded");
         Product dieselRegular = new Product("Diesel Regular");
 
@@ -77,6 +78,9 @@ public class InvoiceDaoTestSuite {
 
         invoice1.getItems().add(item1);
         invoice1.getItems().add(item2);
+
+        item1.setInvoice(invoice1);
+        item2.setInvoice(invoice1);
 
         //When
         invoiceDao.save(invoice1);
