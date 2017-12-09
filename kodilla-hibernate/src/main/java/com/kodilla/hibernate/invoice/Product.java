@@ -28,7 +28,8 @@ public class Product {
     }
 
     @NotNull
-    @Column(name = "NAME", unique = false)
+
+    @Column(name = "NAME")
     public String getName() {
         return name;
     }
