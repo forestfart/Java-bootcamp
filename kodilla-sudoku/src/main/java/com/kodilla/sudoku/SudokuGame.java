@@ -5,15 +5,14 @@ import java.util.List;
 
 public class SudokuGame {
     public static int EMPTY = 0;
-    public boolean exit = false;
 
     public void printArray(final List<List<SudokuElement>> sudokuArray) {
         List<SudokuElement> row;
-        System.out.println("\n  r \\ c    1   2   3   4   5   6   7   8   9           Sudoku Game help:\n                                                       ...................................");
+        System.out.println("\n  r \\ c    1   2   3   4   5   6   7   8   9           Sudoku Game help:\n                                                       ......................................");
         for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
             row = sudokuArray.get(rowIndex);
             System.out.print("  " + (rowIndex + 1) + "      |");
-            for (int columnIndex = 0; columnIndex < 9; columnIndex++ ) {
+            for (int columnIndex = 0; columnIndex < 9; columnIndex++) {
                 if (row.get(columnIndex).getValue() == EMPTY) {
                     System.out.print("   |");
                 } else {
@@ -37,20 +36,16 @@ public class SudokuGame {
                             System.out.print("          type 'exit' to finish");
                             break;
                         case 5:
-                            System.out.print("         ....................................");
+                            System.out.print("          type 'sudoku' to find a solution");
                             break;
                         case 6:
-                            if (sudokuArrayValidate(sudokuArray)) {
-                                System.out.print("         The board is resolvable");
-                            } else {
-                                System.out.print("         The board is unresolvable!! please modify values");
-                            }
+                            System.out.print("          type 'new game' to reset");
                             break;
                         case 7:
-                            System.out.print("         free");
+                            System.out.print("         .......................................");
                             break;
                         case 8:
-                            System.out.print("         free");
+                            System.out.print("                                      good luck!");
                             break;
                     }
                 }
@@ -62,23 +57,56 @@ public class SudokuGame {
 
     public List<List<SudokuElement>> fillSudokuArray(List<List<SudokuElement>> sudokuArray, String command) {
         try {
-            int insertValue;
-            for (int i=0; i<command.length()/4; i++) {
-                insertValue = Character.getNumericValue(command.charAt((i*4)+2));
-                sudokuArray.get(Character.getNumericValue(command.charAt(i*4))-1).get(Character.getNumericValue(command.charAt((i*4)+1))-1).setValue(insertValue);
+            int row, column, currentValue, insertValue;
+
+            for (int stringIndex = 0; stringIndex < command.length() / 4; stringIndex++) {
+
+                row = Character.getNumericValue(command.charAt(stringIndex * 4)) - 1;
+                column = Character.getNumericValue(command.charAt((stringIndex * 4) + 1)) - 1;
+                currentValue = sudokuArray.get(row).get(column).getValue();
+                insertValue = Character.getNumericValue(command.charAt((stringIndex * 4) + 2));
+
+                if (currentValue == insertValue) {
+                    System.out.println("The value " + insertValue + " is already there at row " + (row + 1) + ", column " + (column + 1));
+
+                } else if (currentValue != insertValue) {
+
+                    if (sudokuArray.get(row).get(column).setValue(insertValue)) {
+                        if (currentValue != 0) {
+                            for (int columnIndex = 0; columnIndex < 9; columnIndex++) {
+                                sudokuArray.get(row).get(columnIndex).addToAvailableValues(currentValue);
+                            }
+                            for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
+                                sudokuArray.get(rowIndex).get(column).addToAvailableValues(currentValue);
+                            }
+                            for (int columnIndex = column / 3 * 3; columnIndex < column / 3 * 3 + 3; columnIndex++) {
+                                for (int rowIndex = row / 3 * 3; rowIndex < row / 3 * 3 + 3; rowIndex++) {
+                                    sudokuArray.get(rowIndex).get(columnIndex).addToAvailableValues(currentValue);
+                                }
+                            }
+                        }
+                        for (int columnIndex = 0; columnIndex < 9; columnIndex++) {
+                            sudokuArray.get(row).get(columnIndex).removeFromAvailableValues(insertValue);
+                        }
+                        for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
+                            sudokuArray.get(rowIndex).get(column).removeFromAvailableValues(insertValue);
+                        }
+                        for (int columnIndex = column / 3 * 3; columnIndex < column / 3 * 3 + 3; columnIndex++) {
+                            for (int rowIndex = row / 3 * 3; rowIndex < row / 3 * 3 + 3; rowIndex++) {
+                                sudokuArray.get(rowIndex).get(columnIndex).removeFromAvailableValues(insertValue);
+                            }
+                        }
+                    } else {
+                        System.out.println("Illegal to insert " + insertValue + " to row " + (row + 1) + ", column " + (column + 1) + " due to an other existing value. Please try something else..");
+                    }
+                } else {
+                    System.out.println("Impossible to insert " + insertValue + " (row " + (row + 1) + ", column " + (column + 1) + "). Please try something else..");
+                }
             }
         } catch (Exception e) {
             System.out.println(e);
         }
         return sudokuArray;
-    }
-
-    public boolean sudokuArrayValidate(List<List<SudokuElement>> sudokuArray) {
-        boolean isValidated = false;
-
-
-
-        return isValidated;
     }
 
     public List<List<SudokuElement>> createNewGame() {
@@ -92,10 +120,5 @@ public class SudokuGame {
             sudokuArray.add(rowList);
         }
         return sudokuArray;
-    }
-
-    public boolean resolveSudoku() {
-
-        return exit;
     }
 }

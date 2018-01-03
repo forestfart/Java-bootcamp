@@ -12,28 +12,38 @@ public class RunSudokuGame {
 
         Scanner scanner = new Scanner(System.in);
         CommandValidator commandValidator = new CommandValidator();
-
         SudokuGame sudokuGame = new SudokuGame();
 
         sudokuArray = sudokuGame.createNewGame();
 
-
         while (!gameFinished) {
-
             sudokuGame.printArray(sudokuArray);
-
-            //gameFinished = sudokuGame.resolveSudoku();
             String command = scanner.nextLine();
-            if (command.equals("exit")) {
-                gameFinished = true;
-            } else {
-                if (commandValidator.validate(command)) {
-                    sudokuArray = sudokuGame.fillSudokuArray(sudokuArray, command);
-                }
+            switch (command) {
+                case "new game":
+                    sudokuArray = sudokuGame.createNewGame();
+                    break;
 
+                case "sudoku":
+                    SudokuSolver sudokuSolver = new SudokuSolver(sudokuArray);
+                    if (sudokuSolver.solveSudoku(0,0)) {
+                        for (int i = 0; i < 9; i++) {
+                            for (int j = 0; j < 9; j++) {
+                                sudokuArray.get(i).get(j).getAvailableValues().clear();
+                                sudokuArray.get(i).get(j).getAvailableValues().add(0);
+                            }
+                        }
+                    }
+                    break;
 
+                case "exit":
+                    gameFinished = true;
+
+                default:
+                    if (commandValidator.validate(command)) {
+                        sudokuArray = sudokuGame.fillSudokuArray(sudokuArray, command);
+                    }
             }
         }
     }
-
 }
