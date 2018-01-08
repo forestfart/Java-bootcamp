@@ -33,6 +33,8 @@ public class RunSudokuGame {
                                 sudokuArray.get(i).get(j).getAvailableValues().add(0);
                             }
                         }
+                    } else {
+                        System.out.println("Array has no solution! please modify a element..");
                     }
                     break;
 
