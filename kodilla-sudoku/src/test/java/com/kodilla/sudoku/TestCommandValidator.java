@@ -5,36 +5,125 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TestCommandValidator {
+    private String testInput;
 
     @Test
-    public void testCommandValidator() {
+    public void testCase1() {
         // Given
         CommandValidator commandValidator = new CommandValidator();
-        String testInput1, testInput2, testInput3, testInput4, testInput5, testInput6, testInput7, testInput8, testInput9, testInput10;
 
         // When
-        testInput1 = "111,";
-        testInput2 = "123,123,123,352,265,";
-        testInput3 = "1,";
-        testInput4 = "111";
-        testInput5 = ",,,";
-        testInput6 = "qwertyuiopasdfghjklzxcvbnm,./";
-        testInput7 = "1234567890";
-        testInput8 = "\n";
-        testInput9 = "1234,123,645,345,765,";
-        testInput10 = "xxx,xxx,";
+        testInput = "111,";
 
         // Then
-        assertTrue(commandValidator.validate(testInput1));
-        assertTrue(commandValidator.validate(testInput2));
-        assertFalse(commandValidator.validate(testInput3));
-        assertFalse(commandValidator.validate(testInput4));
-        assertFalse(commandValidator.validate(testInput5));
-        assertFalse(commandValidator.validate(testInput6));
-        assertFalse(commandValidator.validate(testInput7));
-        assertFalse(commandValidator.validate(testInput8));
-        assertFalse(commandValidator.validate(testInput9));
-        assertFalse(commandValidator.validate(testInput10));
+        assertTrue(commandValidator.validate(testInput));
     }
 
+    @Test
+    public void testCase2() {
+        // Given
+        CommandValidator commandValidator = new CommandValidator();
+
+        // When
+        testInput = "123,123,123,352,265,";
+
+        // Then
+        assertTrue(commandValidator.validate(testInput));
+    }
+
+    @Test
+    public void testCase3() {
+        // Given
+        CommandValidator commandValidator = new CommandValidator();
+
+        // When
+        testInput = "1,";
+
+        // Then
+        assertFalse(commandValidator.validate(testInput));
+    }
+
+    @Test
+    public void testCase4() {
+        // Given
+        CommandValidator commandValidator = new CommandValidator();
+
+        // When
+        testInput = "111";
+
+        // Then
+        assertFalse(commandValidator.validate(testInput));
+    }
+
+    @Test
+    public void testCase5() {
+        // Given
+        CommandValidator commandValidator = new CommandValidator();
+
+        // When
+        testInput = ",,,";
+
+        // Then
+        assertFalse(commandValidator.validate(testInput));
+    }
+
+    @Test
+    public void testCase6() {
+        // Given
+        CommandValidator commandValidator = new CommandValidator();
+
+        // When
+        testInput = "qwertyuiopasdfghjklzxcvbnm,./";
+
+        // Then
+        assertFalse(commandValidator.validate(testInput));
+    }
+
+    @Test
+    public void testCase7() {
+        // Given
+        CommandValidator commandValidator = new CommandValidator();
+
+        // When
+        testInput = "1234567890";
+
+        // Then
+        assertFalse(commandValidator.validate(testInput));
+    }
+
+    @Test
+    public void testCase8() {
+        // Given
+        CommandValidator commandValidator = new CommandValidator();
+
+        // When
+        testInput = "\n";
+
+        // Then
+        assertFalse(commandValidator.validate(testInput));
+    }
+
+    @Test
+    public void testCase9() {
+        // Given
+        CommandValidator commandValidator = new CommandValidator();
+
+        // When
+        testInput = "1234,123,645,345,765";
+
+        // Then
+        assertFalse(commandValidator.validate(testInput));
+    }
+
+    @Test
+    public void testCase10() {
+        // Given
+        CommandValidator commandValidator = new CommandValidator();
+
+        // When
+        testInput = "xxx,xxx,";
+
+        // Then
+        assertFalse(commandValidator.validate(testInput));
+    }
 }

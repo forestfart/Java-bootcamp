@@ -34,7 +34,7 @@ public class RunSudokuGame {
                             }
                         }
                     } else {
-                        System.out.println("Array has no solution! please modify a element..");
+                        System.out.println("Array has no solution! please modify an element..");
                     }
                     break;
 
