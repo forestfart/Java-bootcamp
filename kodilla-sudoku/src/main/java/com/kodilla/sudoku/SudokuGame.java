@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuGame {
-    public static int EMPTY = 0;
+    public static final int EMPTY = 0;
+    private List<List<SudokuElement>> sudokuArray;
+    private int subArrayRowOffset;
+    private int subArrayColumnOffset;
 
-    public void printArray(final List<List<SudokuElement>> sudokuArray) {
+    public void printArray() {
         List<SudokuElement> row;
         System.out.println("\n  r \\ c    1   2   3   4   5   6   7   8   9           Sudoku Game help:\n                                                       ......................................");
         for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
@@ -55,19 +58,26 @@ public class SudokuGame {
         System.out.println("");
     }
 
-    private void updateAvailableElements(List<List<SudokuElement>> sudokuArray, int currentValue, int insertValue, int row, int column) {
+    private void addToAffectedElements(int currentValue, int row, int column) {
+        for (int columnIndex = 0; columnIndex < 9; columnIndex++) {
+            sudokuArray.get(row).get(columnIndex).addToAvailableValues(currentValue);
+        }
+        for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
+            sudokuArray.get(rowIndex).get(column).addToAvailableValues(currentValue);
+        }
+        for (int columnIndex = subArrayColumnOffset; columnIndex < subArrayColumnOffset + 3; columnIndex++) {
+            for (int rowIndex = subArrayRowOffset; rowIndex < subArrayRowOffset + 3; rowIndex++) {
+                sudokuArray.get(rowIndex).get(columnIndex).addToAvailableValues(currentValue);
+            }
+        }
+    }
+
+    private void updateAffectedElements(int currentValue, int insertValue, int row, int column) {
+        subArrayRowOffset = row / 3 * 3;
+        subArrayColumnOffset = column / 3 * 3;
+
         if (currentValue != 0) {
-            for (int columnIndex = 0; columnIndex < 9; columnIndex++) {
-                sudokuArray.get(row).get(columnIndex).addToAvailableValues(currentValue);
-            }
-            for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
-                sudokuArray.get(rowIndex).get(column).addToAvailableValues(currentValue);
-            }
-            for (int columnIndex = column / 3 * 3; columnIndex < column / 3 * 3 + 3; columnIndex++) {
-                for (int rowIndex = row / 3 * 3; rowIndex < row / 3 * 3 + 3; rowIndex++) {
-                    sudokuArray.get(rowIndex).get(columnIndex).addToAvailableValues(currentValue);
-                }
-            }
+            addToAffectedElements(currentValue, row, column);
         }
         for (int columnIndex = 0; columnIndex < 9; columnIndex++) {
             sudokuArray.get(row).get(columnIndex).removeFromAvailableValues(insertValue);
@@ -75,14 +85,14 @@ public class SudokuGame {
         for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
             sudokuArray.get(rowIndex).get(column).removeFromAvailableValues(insertValue);
         }
-        for (int columnIndex = column / 3 * 3; columnIndex < column / 3 * 3 + 3; columnIndex++) {
-            for (int rowIndex = row / 3 * 3; rowIndex < row / 3 * 3 + 3; rowIndex++) {
+        for (int columnIndex = subArrayColumnOffset; columnIndex < subArrayColumnOffset + 3; columnIndex++) {
+            for (int rowIndex = subArrayRowOffset; rowIndex < subArrayRowOffset + 3; rowIndex++) {
                 sudokuArray.get(rowIndex).get(columnIndex).removeFromAvailableValues(insertValue);
             }
         }
     }
 
-    public List<List<SudokuElement>> fillSudokuArray(List<List<SudokuElement>> sudokuArray, String command) {
+    public List<List<SudokuElement>> fillSudokuArray(String command) {
         int row, column, currentValue, insertValue;
 
         try {
@@ -96,7 +106,7 @@ public class SudokuGame {
                     System.out.println("The value " + insertValue + " is already there at row " + (row + 1) + ", column " + (column + 1));
                 } else if (currentValue != insertValue) {
                     if (sudokuArray.get(row).get(column).setValue(insertValue)) {
-                        updateAvailableElements(sudokuArray, currentValue, insertValue, row, column);
+                        updateAffectedElements(currentValue, insertValue, row, column);
                     } else {
                         System.out.println("Illegal to insert " + insertValue + " to row " + (row + 1) + ", column " + (column + 1) + " due to an other existing value. Please try something else..");
                     }
@@ -112,7 +122,7 @@ public class SudokuGame {
 
     public List<List<SudokuElement>> createNewGame() {
 
-        List<List<SudokuElement>> sudokuArray = new ArrayList<>();
+        sudokuArray = new ArrayList<>();
         for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
             List<SudokuElement> rowList = new ArrayList<>();
             for (int columnIndex = 0; columnIndex < 9; columnIndex++) {
@@ -120,6 +130,10 @@ public class SudokuGame {
             }
             sudokuArray.add(rowList);
         }
+        return sudokuArray;
+    }
+
+    public List<List<SudokuElement>> getSudokuArray() {
         return sudokuArray;
     }
 }

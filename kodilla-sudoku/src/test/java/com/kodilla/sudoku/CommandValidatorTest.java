@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class TestCommandValidator {
+public class CommandValidatorTest {
     private String testInput;
 
     @Test

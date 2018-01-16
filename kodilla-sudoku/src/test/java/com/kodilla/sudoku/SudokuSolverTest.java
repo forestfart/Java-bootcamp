@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class TestSudokuSolver {
+public class SudokuSolverTest {
     @Test
     public void isAvailable() {
         // Given
@@ -66,7 +66,7 @@ public class TestSudokuSolver {
         sudokuArrayUnsolvable.get(1).get(4).setValue(2);
         sudokuArrayUnsolvable.get(1).get(5).setValue(3);
 
-        sudokuGame.printArray(sudokuArrayUnsolvable);
+        sudokuGame.printArray();
 
         SudokuSolver badSudokuSolver = new SudokuSolver(sudokuArrayUnsolvable);
 

@@ -17,7 +17,7 @@ public class RunSudokuGame {
         sudokuArray = sudokuGame.createNewGame();
 
         while (!gameFinished) {
-            sudokuGame.printArray(sudokuArray);
+            sudokuGame.printArray();
             String command = scanner.nextLine();
             switch (command) {
                 case "new game":
@@ -43,7 +43,7 @@ public class RunSudokuGame {
 
                 default:
                     if (commandValidator.validate(command)) {
-                        sudokuArray = sudokuGame.fillSudokuArray(sudokuArray, command);
+                        sudokuArray = sudokuGame.fillSudokuArray(command);
                     }
             }
         }

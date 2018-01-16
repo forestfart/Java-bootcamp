@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class TestSudokuGame {
+public class SudokuGameTest {
 
     public void printAllAvailabilities(List<List<SudokuElement>> sudokuArray) {
         String availableArray;
@@ -25,20 +25,19 @@ public class TestSudokuGame {
     @Test
     public void testFillSudokuArrayFirst3x3 () {
         //Given
-        List<List<SudokuElement>> sudokuArray;
         SudokuGame sudokuGame = new SudokuGame();
-        sudokuArray = sudokuGame.createNewGame();
+        sudokuGame.createNewGame();
 
         //When
 
-        sudokuArray = sudokuGame.fillSudokuArray(sudokuArray, "111,122,133,214,225,236,317,328,");
-        sudokuGame.printArray(sudokuArray);
+        sudokuGame.fillSudokuArray("111,122,133,214,225,236,317,328,");
+        sudokuGame.printArray();
 
         //Then
-        printAllAvailabilities(sudokuArray);
+        printAllAvailabilities(sudokuGame.getSudokuArray());
 
-        int expectedValue3x3 = sudokuArray.get(2).get(2).getAvailableValues().get(0);
-        List<Integer> expectedValue9x1 = sudokuArray.get(8).get(0).getAvailableValues();
+        int expectedValue3x3 = sudokuGame.getSudokuArray().get(2).get(2).getAvailableValues().get(0);
+        List<Integer> expectedValue9x1 = sudokuGame.getSudokuArray().get(8).get(0).getAvailableValues();
 
         Assert.assertEquals(9, expectedValue3x3);
         Assert.assertEquals(6, expectedValue9x1.size());
@@ -47,19 +46,18 @@ public class TestSudokuGame {
     @Test
     public void testSudokuElementAvailableValues () {
         //Given
-        List<List<SudokuElement>> sudokuArray;
         SudokuGame sudokuGame = new SudokuGame();
-        sudokuArray = sudokuGame.createNewGame();
+        sudokuGame.createNewGame();
 
         //When
 
-        sudokuArray = sudokuGame.fillSudokuArray(sudokuArray, "441,452,463,544,555,566,647,658,669,");
-        sudokuGame.printArray(sudokuArray);
+        sudokuGame.fillSudokuArray( "441,452,463,544,555,566,647,658,669,");
+        sudokuGame.printArray();
 
         //Then
-        printAllAvailabilities(sudokuArray);
+        printAllAvailabilities(sudokuGame.getSudokuArray());
 
-        List<Integer> expectedList6x6 = sudokuArray.get(5).get(5).getAvailableValues();
+        List<Integer> expectedList6x6 = sudokuGame.getSudokuArray().get(5).get(5).getAvailableValues();
         int expectedValue6x6 = expectedList6x6.get(0);
 
         Assert.assertEquals(1, expectedList6x6.size());
@@ -69,18 +67,17 @@ public class TestSudokuGame {
     @Test
     public void testSudokuArrayModification() {
         //Given
-        List<List<SudokuElement>> sudokuArray;
         SudokuGame sudokuGame = new SudokuGame();
-        sudokuArray = sudokuGame.createNewGame();
+        sudokuGame.createNewGame();
 
         //When
-        sudokuArray = sudokuGame.fillSudokuArray(sudokuArray, "441,442,443,444,555,556,997,998,999,");
-        sudokuGame.printArray(sudokuArray);
+        sudokuGame.fillSudokuArray("441,442,443,444,555,556,997,998,999,");
+        sudokuGame.printArray();
 
         //Then
-        printAllAvailabilities(sudokuArray);
+        printAllAvailabilities(sudokuGame.getSudokuArray());
 
-        List<Integer> expectedList6x6 = sudokuArray.get(5).get(5).getAvailableValues();
+        List<Integer> expectedList6x6 = sudokuGame.getSudokuArray().get(5).get(5).getAvailableValues();
         int expectedValue6x6 = expectedList6x6.get(0);
 
         Assert.assertEquals(7, expectedList6x6.size());
