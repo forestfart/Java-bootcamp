@@ -5,10 +5,14 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(
+@NamedQueries({
+    @NamedQuery(
+        name = "Employee.searchEmployeeByLastName",
+        query = "FROM Employee WHERE lastName LIKE CONCAT(:SEARCHKEY, '%')"),
+    @NamedQuery(
         name = "Employee.employeeQuery",
-        query = "FROM Employee WHERE lastName = :LASTNAME"
-)
+        query = "FROM Employee WHERE lastName = :LASTNAME")
+})
 
 @Entity
 @Table(name = "EMPLOYEES")
@@ -21,7 +25,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String firstname, String lastname) {
+    public Employee(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -64,7 +68,7 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    private void setLastName(String lastname) {
+    private void setLastName(String lastName) {
         this.lastName = lastName;
     }
 

@@ -5,12 +5,16 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(
+        name = "Company.searchCompanyByName",
+        query = "FROM Company WHERE name LIKE CONCAT(:SEARCHKEY, '%')"
+)
+
 @NamedNativeQuery(
         name = "Company.retrieveCompaniesWhichNamesBeginWith",
         query = "SELECT * FROM COMPANIES " +
                 "WHERE LEFT(company_name, 3) = :BEGINWITH",
-        resultClass = Company.class
-)
+        resultClass = Company.class)
 
 @Entity
 @Table(name = "COMPANIES")

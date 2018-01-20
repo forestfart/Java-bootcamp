@@ -23,7 +23,7 @@ public class CommandValidator {
                 }
             }
         } else {
-            System.out.println("incorrect input type, it should be like '123,' or '123,321,654,'etc. Please try again");
+            System.out.println("incorrect input type, it should be like '123,' or '123,321,654,'etc.");
             isValidated = false;
         }
         if (!isValidated) {

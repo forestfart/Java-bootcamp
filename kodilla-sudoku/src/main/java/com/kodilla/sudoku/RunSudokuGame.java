@@ -23,7 +23,6 @@ public class RunSudokuGame {
                 case "new game":
                     sudokuArray = sudokuGame.createNewGame();
                     break;
-
                 case "sudoku":
                     SudokuSolver sudokuSolver = new SudokuSolver(sudokuArray);
                     if (sudokuSolver.solveSudoku(0,0)) {
@@ -37,10 +36,9 @@ public class RunSudokuGame {
                         System.out.println("Array has no solution! please modify an element..");
                     }
                     break;
-
                 case "exit":
                     gameFinished = true;
-
+                    break;
                 default:
                     if (commandValidator.validate(command)) {
                         sudokuArray = sudokuGame.fillSudokuArray(command);
