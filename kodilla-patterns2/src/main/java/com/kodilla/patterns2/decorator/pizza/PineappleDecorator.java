@@ -6,6 +6,7 @@ import java.util.List;
 public class PineappleDecorator extends AbstractPizzaDecorator {
     public PineappleDecorator(PizzaOrder pizzaOrder) {
         super(pizzaOrder);
+        super.getIngredients().add("Pineapple");
     }
 
     @Override
@@ -20,7 +21,6 @@ public class PineappleDecorator extends AbstractPizzaDecorator {
 
     @Override
     public List<String> getIngredients() {
-        super.getIngredients().add("Pineapple");
         return super.getIngredients();
     }
 }

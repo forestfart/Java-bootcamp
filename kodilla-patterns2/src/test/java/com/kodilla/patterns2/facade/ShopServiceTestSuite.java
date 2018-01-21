@@ -72,7 +72,7 @@ public class ShopServiceTestSuite {
         order.addItem(new ItemDto(25L, 1));
         order.addItem(new ItemDto(11L, 3));
         try {
-            orderFacade.processOrder(order, 1L);
+            orderFacade.processOrder(order, 15545L);
         } catch (OrderProcessingException e ) {
             // business exception - should be handled in real application
         }
