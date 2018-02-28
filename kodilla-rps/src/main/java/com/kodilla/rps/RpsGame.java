@@ -2,33 +2,15 @@ package com.kodilla.rps;
 
 import java.util.Scanner;
 
+import static com.kodilla.rps.Shapes.*;
+
 public class RpsGame {
-    private static final String STONE = "stone";
-    private static final String PAPER = "paper";
-    private static final String SCISSORS = "scissors";
+    private static final String EXIT = "x";
+    private static final String NEW_GAME = "n";
     private int userScore;
     private int computerScore;
-    private int roundsPerGame = 0;
-    private String playerName;
-    private String userShape;
-    private String computerShape;
-    private String userInput;
-    private Scanner scanner;
-    private UserInterface userInterface;
-    private CommandValidator commandValidator;
-    private ShapeGenerator shapeGenerator;
-    private int roundCount;
-    private boolean exit;
 
-    public RpsGame(String playerName, UserInterface userInterface, Scanner scanner) {
-        this.playerName = playerName;
-        this.userInterface = userInterface;
-        this.scanner = scanner;
-        this.commandValidator = new CommandValidator();
-        this.shapeGenerator = new ShapeGenerator();
-    }
-
-    public void determineWinner() {
+    public void determineWinner(UserInterface userInterface, Shapes userShape, Shapes computerShape, String playerName) {
 
         if (!userShape.equals(computerShape)) {
 
@@ -44,10 +26,12 @@ public class RpsGame {
         }
     }
 
-    public boolean run() {
+    public boolean run(UserInterface userInterface, Scanner scanner, String playerName) {
         userScore = 0;
         computerScore = 0;
+        int roundsPerGame;
         userInterface.askForNumberOfRounds(playerName);
+        CommandValidator commandValidator = new CommandValidator();
         do {
             roundsPerGame = commandValidator.validateNumber(scanner.nextLine());
             if (roundsPerGame == 0) {
@@ -57,31 +41,35 @@ public class RpsGame {
 
         userInterface.mainMenu();
 
-        roundCount = 0;
+        int roundCount = 0;
+        String userInput;
+        boolean exit = false;
+        Shapes userShape, computerShape;
+        ShapeGenerator shapeGenerator = new ShapeGenerator();
         while (roundCount < roundsPerGame) {
             roundCount++;
             userInput = commandValidator.validateGameInput(scanner.nextLine(), scanner, userInterface);
                 switch (userInput) {
 
-                    case "x":
+                    case EXIT:
                         exit = true;
                         roundCount = roundsPerGame; //to exit this while loop
                         break;
 
-                    case "n":
+                    case NEW_GAME:
                         roundCount = roundsPerGame; // to exit this while loop
                         break;
 
                     default:
-                        userShape = userInput;
-                        computerShape = shapeGenerator.generateShape(userInput);
+                        userShape = valueOf(userInput.toUpperCase());
+                        computerShape = shapeGenerator.generateShape(userShape);
                         userInterface.showRoundResult(userShape, computerShape);
-                        determineWinner();
+                        determineWinner(userInterface, userShape, computerShape, playerName);
                 }
         }
         userInterface.displayScores(userScore, computerScore);
         userInput = commandValidator.validateEndOfGameChoice(scanner.nextLine(), scanner, userInterface);
-        if (userInput.equals("x")) {
+        if (userInput.equals(EXIT)) {
             exit = true;
         }
         return exit;

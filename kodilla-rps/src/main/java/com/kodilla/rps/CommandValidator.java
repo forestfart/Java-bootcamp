@@ -2,10 +2,16 @@ package com.kodilla.rps;
 
 import java.util.Scanner;
 
+import static com.kodilla.rps.Shapes.*;
+
 public class CommandValidator {
-    private static final String STONE = "stone";
-    private static final String PAPER = "paper";
-    private static final String SCISSORS = "scissors";
+    private static final String EXIT = "x";
+    private static final String NEW_GAME = "n";
+    private static final String YES = "Y";
+    private static final String MENU_CHOICE_1 = "1";
+    private static final String MENU_CHOICE_2 = "2";
+    private static final String MENU_CHOICE_3 = "3";
+
 
     public int validateNumber(String roundsNumber) {
         if (roundsNumber.isEmpty()) {
@@ -22,50 +28,52 @@ public class CommandValidator {
     }
 
     public String validateGameInput(String input, Scanner scanner, UserInterface userInterface) {
-        while (!input.equals("1") || !input.equals("2") || !input.equals("3") || !input.equals("x") || !input.equals("n")){
+        while (true) {
             switch (input) {
-                case "1":
-                    return STONE;
-                case "2":
-                    return PAPER;
-                case "3":
-                    return SCISSORS;
-                case "x":
+                case MENU_CHOICE_1:
+                    return STONE.getText();
+                case MENU_CHOICE_2:
+                    return PAPER.getText();
+                case MENU_CHOICE_3:
+                    return SCISSORS.getText();
+                case EXIT:
                     userInterface.quitConfirmationMessage();
                     input = scanner.nextLine();
-                    if (input.toUpperCase().equals("Y")) { return "x"; }
+                    if (input.toUpperCase().equals(YES)) { return EXIT; }
                     break;
-                case "n":
+                case NEW_GAME:
                     userInterface.newGameConfirmationMessage();
                     input = scanner.nextLine();
-                    if (input.toUpperCase().equals("Y")) { return "n"; }
+                    if (input.toUpperCase().equals(YES)) { return NEW_GAME; }
                     break;
                 default:
                     userInterface.incorrectGameInput();
                     input = scanner.nextLine();
             }
         }
-        return input;
     }
 
     public String validateEndOfGameChoice(String input, Scanner scanner, UserInterface userInterface) {
-        while (!input.equals("x") || !input.equals("n")){
+        while (true) {
             switch (input) {
-                case "x":
+                case EXIT:
                     userInterface.quitConfirmationMessage();
                     input = scanner.nextLine();
-                    if (input.toUpperCase().equals("Y")) { return "x"; }
+                    if (input.toUpperCase().equals(YES)) {
+                        return EXIT;
+                    }
                     break;
-                case "n":
+                case NEW_GAME:
                     userInterface.newGameConfirmationMessage();
                     input = scanner.nextLine();
-                    if (input.toUpperCase().equals("Y")) { return "n"; }
+                    if (input.toUpperCase().equals(YES)) {
+                        return NEW_GAME;
+                    }
                     break;
                 default:
                     userInterface.incorrectEndOfGameInput();
                     input = scanner.nextLine();
             }
         }
-        return input;
     }
 }

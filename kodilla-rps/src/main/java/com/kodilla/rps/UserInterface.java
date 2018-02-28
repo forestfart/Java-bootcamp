@@ -7,7 +7,7 @@ public class UserInterface {
     }
 
     public void askForNumberOfRounds(String playerName) {
-        System.out.println("May the odds be ever in your favor " + playerName + "! \nType how many rounds you wish to play in one game:");
+        System.out.println(String.format("May the odds be ever in your favor %s! \nType how many rounds you wish to play in one game:", playerName));
     }
 
     public void incorrectRoundsInput() {
@@ -33,27 +33,27 @@ public class UserInterface {
     }
 
     public void userWinsMessage(String playerName, int userScore, int computerScore) {
-        System.out.println(playerName + " wins!" + " " + playerName + " won: " + userScore + ", Computer won: " + computerScore);
+        System.out.println(String.format("%s wins! %s won: %d, Computer won: %d", playerName, playerName, userScore, computerScore));
     }
 
     public void computerWinsMessage(String playerName, int userScore, int computerScore) {
-        System.out.println("Bad luck, computer wins." + " " + playerName + " won: " + userScore + ", Computer won: " + computerScore);
+        System.out.println(String.format("Bad luck, computer wins. %s won: %d, Computer won: %d", playerName, userScore, computerScore));
     }
 
     public void drawMessage(String name, int userScore, int computerScore) {
-        System.out.println("It's a draw! " + name + " won: " + userScore + ", Computer won: " + computerScore);
+        System.out.println(String.format("It's a draw! %s won: %d, Computer won: %d", name, userScore, computerScore));
     }
 
     public void displayScores(int userScore, int computerScore) {
-        System.out.println("-------------------------------------------------" +
+        System.out.println(String.format("-------------------------------------------------" +
                 "\nGame Over!" +
-                "\nYou have won: " + userScore + " times. " + ", versus computer: " + computerScore +
-                "\n-------------------------------------------------");
+                "\nYou have won: %d times, versus computer: %d" +
+                "\n-------------------------------------------------", userScore, computerScore));
         System.out.println("\nWould you like try one more time? 'n' - start new game; 'x' - quit;");
     }
 
-    public void showRoundResult(String userShape, String computerShape) {
-        System.out.println(" you:     " + userShape + "  ------ vs ------ " + computerShape + "    :computer ");
+    public void showRoundResult(Shapes userShape, Shapes computerShape) {
+        System.out.println(String.format(" you:     %s  ------ vs ------ %s    :computer ", userShape, computerShape));
     }
 
     public void incorrectEndOfGameInput() {

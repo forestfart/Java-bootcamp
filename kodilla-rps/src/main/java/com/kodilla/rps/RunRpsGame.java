@@ -13,8 +13,8 @@ public class RunRpsGame {
         userInterface.welcomeMessage();
         String playerName = scanner.nextLine();
         while (!exit) {
-            RpsGame rpsGame = new RpsGame(playerName, userInterface, scanner);
-            exit = rpsGame.run();
+            RpsGame rpsGame = new RpsGame();
+            exit = rpsGame.run(userInterface, scanner, playerName);
         }
     }
 }

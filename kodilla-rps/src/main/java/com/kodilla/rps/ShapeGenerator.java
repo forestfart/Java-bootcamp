@@ -1,12 +1,11 @@
 package com.kodilla.rps;
 
-public class ShapeGenerator {
-    private static final String STONE = "stone";
-    private static final String PAPER = "paper";
-    private static final String SCISSORS = "scissors";
-    private String generatedShape;
+import static com.kodilla.rps.Shapes.*;
 
-    public String generateShape(String userShape){
+public class ShapeGenerator {
+    private Shapes generatedShape;
+
+    public Shapes generateShape(Shapes userShape){
         switch (userShape) {
             case STONE:
                 generatedShape = Math.random() < 0.5 ? PAPER : (Math.random() >= 0.5 && Math.random() < 0.75 ? SCISSORS : STONE);
