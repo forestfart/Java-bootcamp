@@ -10,22 +10,6 @@ public class RpsGame {
     private int userScore;
     private int computerScore;
 
-    public void determineWinner(UserInterface userInterface, Shapes userShape, Shapes computerShape, String playerName) {
-
-        if (!userShape.equals(computerShape)) {
-
-            if (userShape.equals(STONE) && computerShape.equals(SCISSORS) || userShape.equals(SCISSORS) && computerShape.equals(PAPER) || userShape.equals(PAPER) && computerShape.equals(STONE)) {
-                userScore++;
-                userInterface.userWinsMessage(playerName, userScore, computerScore);
-            } else {
-                computerScore++;
-                userInterface.computerWinsMessage(playerName, userScore, computerScore);
-            }
-        } else{
-            userInterface.drawMessage(playerName, userScore, computerScore);
-        }
-    }
-
     public boolean run(UserInterface userInterface, Scanner scanner, String playerName) {
         userScore = 0;
         computerScore = 0;
@@ -64,7 +48,17 @@ public class RpsGame {
                         userShape = valueOf(userInput.toUpperCase());
                         computerShape = shapeGenerator.generateShape(userShape);
                         userInterface.showRoundResult(userShape, computerShape);
-                        determineWinner(userInterface, userShape, computerShape, playerName);
+                        if (!userShape.equals(computerShape)) {
+                            if (userShape.equals(STONE) && computerShape.equals(SCISSORS) || userShape.equals(SCISSORS) && computerShape.equals(PAPER) || userShape.equals(PAPER) && computerShape.equals(STONE)) {
+                                userScore++;
+                                userInterface.userWinsMessage(playerName, userScore, computerScore);
+                            } else {
+                                computerScore++;
+                                userInterface.computerWinsMessage(playerName, userScore, computerScore);
+                            }
+                        } else{
+                            userInterface.drawMessage(playerName, userScore, computerScore);
+                        }
                 }
         }
         userInterface.displayScores(userScore, computerScore);
