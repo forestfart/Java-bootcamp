@@ -9,4 +9,4 @@
 *.MF
 *.css
 *.js
-*/out/*
+**/out/

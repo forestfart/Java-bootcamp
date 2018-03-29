@@ -5,4 +5,7 @@ include 'kodilla-good-patterns'
 include 'kodilla-hibernate'
 include 'kodilla-sudoku'
 include 'kodilla-rps'
+include 'kodilla-testing2'
+include 'kodilla-jdbc'
+include 'kodilla-patterns'
 
